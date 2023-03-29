@@ -1,0 +1,28 @@
+VENV_NAME = test_py27
+PYTHON_VERSION = python2.7
+REQUIREMENTS = requirements.txt
+
+
+.PHONY: manage gunicorn cron_service kafka_consumer venv venv-rm venv-enter
+
+manage:
+	python manage.py runserver 0.0.0.0:8090
+
+gunicorn:
+	python gunicorn_main.py
+
+cron_service:
+	python cron_service/cron_serviced.py
+
+kafka_consumer:
+	python kafka_consumer/consumer_serviced.py
+
+venv:
+	bash build_venv.sh -venv_name=$(VENV_NAME) -python=$(PYTHON_VERSION) -requirement=$(REQUIREMENTS) -ops=create
+
+venv-enter:
+	bash build_venv.sh -venv_name=$(VENV_NAME) -python=$(PYTHON_VERSION) -requirement=$(REQUIREMENTS) -ops=enter
+
+venv-rm:
+	bash build_venv.sh -venv_name=$(VENV_NAME) -python=$(PYTHON_VERSION) -requirement=$(REQUIREMENTS) -ops=remove
+

@@ -1,0 +1,36 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "manage",
+            "django": true,
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/manage.py",
+            "console": "internalConsole",
+            "args": [
+                "runserver",
+                "0.0.0.0:8090"
+            ]
+        },
+        {
+            "name": "gunicorn",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/gunicorn_main.py",
+            "console": "internalConsole",
+            "env": {
+                "GEVENT_SUPPORT": "True"
+            }
+        },
+        {
+            "name": "Python: Debug Tests",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "purpose": ["debug-test"],
+            "console": "internalConsole",
+            "justMyCode": false
+        }
+    ]
+}
