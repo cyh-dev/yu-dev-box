@@ -20,6 +20,6 @@ make && make install
 # pip upgrade
 $python_path/bin/python3 -m pip install $PIP_INDEX --upgrade pip==21.3.1
 $python_path/bin/python3 -m pip install $PIP_INDEX virtualenvwrapper==4.8.4
-ln -s $python_path/bin/python3 /usr/local/bin/python3
-ln -s $python_path/bin/pip3 /usr/local/bin/pip3
+ln -sf $python_path/bin/python3 /usr/local/bin/python3
+ln -sf $python_path/bin/pip3 /usr/local/bin/pip3
 rm -rf /tmp/Python-$python_version*
