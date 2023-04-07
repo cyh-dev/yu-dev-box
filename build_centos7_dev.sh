@@ -23,6 +23,7 @@ $( cd "$( dirname "${BASH_SOURCE[0]:-${(%):-%N}}" )" >/dev/null 2>&1 && pwd )/py
 # zshrc
 yu_dev_box_path=$( cd "$( dirname "${BASH_SOURCE[0]:-${(%):-%N}}" )" >/dev/null 2>&1 && pwd )
 
+touch ~/.zshrc
 sed -i '/export YU_DEV_BOX/,+1d' ~/.zshrc
 echo "export YU_DEV_BOX=\"$yu_dev_box_path\"" >> ~/.zshrc
 echo 'source $YU_DEV_BOX/yu-zshrc.sh' >> ~/.zshrc
