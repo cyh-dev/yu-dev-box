@@ -1,6 +1,5 @@
 # -*- conding: utf-8 -*-
-
-import json
+import ast
 import sys
 import urllib.parse
 
@@ -9,9 +8,9 @@ log = sys.argv[1]
 arr = log.split('|')
 
 path = arr[8].strip()
-query = json.loads(arr[10].replace("u'", '"').replace("'", '"').strip())
+query = ast.literal_eval(arr[10])
 body = arr[11].strip()
-content = json.loads(arr[9].replace("'", '"').strip())
+content = ast.literal_eval(arr[9])
 
 host = content.get("HTTP_X_FORWARDED_HOST", "localhost:8000")
 method = content.get("REQUEST_METHOD", "POST")
@@ -41,6 +40,6 @@ body_string = ""
 if body:
     body_string = "\\\n--data '{body}'".format(body=body)
 
-print("curl -X {method} '{url} '\\\n{headers} {body_string}".format(
+print("curl -X {method} '{url}' \\\n{headers} {body_string}".format(
     method=method, url=url, headers=headers, body_string=body_string
 ))
