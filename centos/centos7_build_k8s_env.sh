@@ -40,18 +40,11 @@ sed -i 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/config.to
 
 systemctl enable containerd --now
 
-# proxy
-/workspace/clash-for-linux/start.sh
-source /etc/profile.d/clash.sh
-proxy_on
-
 mkdir -p /workspace/containerd
 
 wget https://github.com/containerd/nerdctl/releases/download/v1.2.0/nerdctl-1.2.0-linux-amd64.tar.gz -O /workspace/containerd/nerdctl-1.2.0-linux-amd64.tar.gz
 
 wget https://github.com/containernetworking/plugins/releases/download/v1.2.0/cni-plugins-linux-amd64-v1.2.0.tgz -O /workspace/containerd/cni-plugins-linux-amd64-v1.2.0.tgz
-
-proxy_off
 
 tar Cxzvvf /usr/local/bin/ /workspace/containerd/nerdctl-1.2.0-linux-amd64.tar.gz
 
