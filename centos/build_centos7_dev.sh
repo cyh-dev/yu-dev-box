@@ -18,7 +18,7 @@ pip install --force-reinstall certifi
 sed -i '/DST Root CA X3/,+27d' /usr/lib/python2.7/site-packages/certifi/cacert.pem
 
 # python3
-$( cd "$( dirname "${BASH_SOURCE[0]:-${(%):-%N}}" )" >/dev/null 2>&1 && pwd )/python/build_python3-centos7.sh
+$( cd "$( dirname "${BASH_SOURCE[0]:-${(%):-%N}}" )" >/dev/null 2>&1 && pwd )/../python/build_python3-centos7.sh
 
 # zshrc
 yu_dev_box_path=$( cd "$( dirname "${BASH_SOURCE[0]:-${(%):-%N}}" )" >/dev/null 2>&1 && pwd )
