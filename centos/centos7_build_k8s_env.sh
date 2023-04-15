@@ -1,5 +1,3 @@
-sed -i '$ a\10.0.8.6 tx01\n10.0.8.13 tx02' /etc/hosts
-
 systemctl disable firewalld --now
 
 swapoff -a
