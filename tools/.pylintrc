@@ -1,0 +1,17 @@
+[MASTER]
+jobs=4
+
+[MESSAGES CONTROL]
+enable=E
+disable=C,R,W, convention, refactor
+
+[FORMAT]
+max-line-length=120
+indent-string='    '
+
+[REPORTS]
+output-format=parseable
+
+[TYPECHECK]
+ignored-modules=django.db
+ignored-classes=_Object,Request

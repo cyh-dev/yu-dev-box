@@ -1,0 +1,21 @@
+image: cyh328863397/centos7-food
+
+stages:
+  - lint
+
+before_script:
+  - 'export LINT_MODE="all"'
+  - '[[ "$CI_COMMIT_REF_NAME" =~ ^feature.*$ ]] && export LINT_MODE="branch"'
+
+lint:
+  stage: lint
+  script:
+    - git fetch
+    - git checkout $CI_COMMIT_REF_NAME
+    - pip install -r requirements.txt -c pip.conf
+    - make lint mode=$LINT_MODE source_branch=$CI_COMMIT_REF_NAME target_branch=origin/master noti_seatalk=true
+  only:
+    - master
+    - release
+    - qa_refactor
+    - /^feature.*$/

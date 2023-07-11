@@ -19,6 +19,7 @@ project_dirs=$(find "$project_dir" -maxdepth 1 -type d)
 for dir in $project_dirs; do
   if [ "$dir" != "$project_dir" ]; then
     cd "$dir"
+    git fetch --all
     git checkout $branch
     cd -
   fi
