@@ -21,6 +21,7 @@ for dir in $project_dirs; do
     cd "$dir"
     git fetch --all
     git checkout $branch
+    git pull
     cd -
   fi
 done
