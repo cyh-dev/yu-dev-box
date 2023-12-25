@@ -15,6 +15,7 @@ ARG PIP_INDEX=""
 ENV PIP_INDEX=$PIP_INDEX
 RUN /opt/python/3.7/bin/python3.7 -m pip install $PIP_INDEX --upgrade pip==21.3.1 && \
     /opt/python/3.7/bin/python3.7 -m pip install $PIP_INDEX virtualenvwrapper==4.8.4 && \
+    /opt/python/3.7/bin/python3.7 -m pip install $PIP_INDEX thefuck==3.32 && \
     cd /opt/python && tar -zcf python3.7.tar.gz --exclude=*.pyc 3.7
 
 
