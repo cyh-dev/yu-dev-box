@@ -1,0 +1,49 @@
+级别：代码重构建议（Refactor）
+1. R1702: too-many-nested-blocks (嵌套块指的是在一个函数或者一个代码块中，有太多的 if/else、for/while 循环、try/except 等嵌套结构)
+https://pylint.pycqa.org/en/latest/user_guide/messages/refactor/too-many-nested-blocks.html
+2. R1704: redefined-argument-from-local (方法内重新定义传入参数)
+https://pylint.pycqa.org/en/latest/user_guide/messages/refactor/redefined-argument-from-local.html
+3. R0401: cyclic-import (循环导入)
+https://pylint.pycqa.org/en/latest/user_guide/messages/refactor/cyclic-import.html
+
+
+级别：代码规范建议（Convention）
+1. C0103: Invalid name (无效的命名)
+2. C0111: Missing module, class, method docstring (缺少模块、类、方法的文档字符串)
+3. C0301: Line too long (行太长)
+4. C0303: Trailing whitespace (尾随空格)
+5. C0411: Wrong import order (错误的导入顺序)
+6. C0412: Imports not grouped correctly (导入没有正确分组)
+7. C1801: Do not use `len(SEQUENCE)` to determine if a sequence is empty (不要使用 `len(SEQUENCE)` 来判断序列是否为空)
+8. C1803: Use `is not None` instead of `!= None` (使用 `is not None` 替代 `!= None`)
+9. C2101: Return statement in `__init__` method (在 `__init__` 方法中使用返回语句)
+10. C2201: Missing method call (缺少方法调用)
+
+
+级别：警告级别错误（Warning）
+1. W0101: Unreachable code (不可达代码)
+2. W0102: Dangerous default value %s as argument (危险的默认参数值 %s)
+3. W0221: Arguments number differs from %s method (参数数量与 %s 方法不一致)
+4. W0401: Wildcard import %s (通配符导入 %s)
+5. W0611: Unused import (未使用的导入)
+6. W0612: Unused variable %r (未使用的变量 %r)
+7. W1203: Use % formatting in logging functions and pass the parameters as arguments (在日志函数中使用 % 格式化，并将参数作为参数传递)
+8. W1401: Anomalous backslash in string (字符串中异常的反斜杠)
+9. W1402: Anomalous Unicode escape in byte string (字节字符串中异常的Unicode转义)
+10. W1501: "str" is not a callable (函数名重叠)
+
+级别：错误级别错误（Error）
+1. E0011: Unrecognized file option %r (无法识别的文件选项 %r)
+2. E0012: Bad option value %r (错误的选项值 %r)
+3. E1101: Instance of 'x' has no 'y' member (实例 'x' 没有 'y' 成员)
+4. E1123: Unexpected keyword argument %r in function call (函数调用中意外的关键字参数 %r)
+5. E1136: Value %s is unsubscriptable (值 %s 无法进行下标操作)
+6. E1137: Assigning to function call which only returns None (对只返回None的函数调用进行赋值)
+7. E1200: Invalid format string used in logging function (日志函数中使用了无效的格式字符串)
+8. E1201: Specify string format arguments as logging function parameters (将字符串格式参数指定为日志函数参数)
+9. E1300: Invalid '%s' object used with %r attribute (使用了无效的 '%s' 对象与 %r 属性)
+10. E1301: Assignment to %s in method %s (在方法 %s 中对 %s 进行赋值)
+
+
+这些只是一些常见的规范编号示例，Pylint还有很多其他的规范编号，您可以在Pylint的官方文档中找到完整的列表
+https://pylint.pycqa.org/en/latest/user_guide/messages/messages_overview.html

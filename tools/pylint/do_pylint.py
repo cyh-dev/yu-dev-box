@@ -5,7 +5,6 @@ import os
 import re
 import subprocess
 
-import requests
 from pylint.lint import Run
 
 scan_files = []
@@ -64,7 +63,7 @@ def get_branch_diff_files(source_branch, target_branch):
 
         return diff_files, source_branch
     except Exception as e:
-        print("分支名错误,请检查重试!")
+        print "分支名错误,请检查重试!"
         print e
         exit(1)
 
@@ -152,29 +151,6 @@ def load_args_files_config(args):
         exit(0)
 
 
-# 在 gitlab CI/CD  运行时通知到 seatalk 群组
-def noti_seatalk():
-    url = os.environ.get("LINT_SEATALK_WEBHOOK")
-    if not url:
-        print "未设置seatalk webhook!"
-        return
-    user_mail = os.environ.get("GITLAB_USER_EMAIL", "")
-    project_name = os.environ.get("CI_PROJECT_NAME", "")
-    branch_name = os.environ.get("CI_COMMIT_REF_NAME", "")
-    job_url = os.environ.get("CI_JOB_URL", "")
-    content = "项目:{project_name}, 分支:{branch_name},代码静态检查发现错误,请及时检查!\n{job_url}".format(
-        project_name=project_name, branch_name=branch_name, job_url=job_url
-    )
-    data = {
-        "tag": "text",
-        "text": {
-            "content": content,
-            "mentioned_email_list": [user_mail]
-        }
-    }
-    resp = requests.post(url=url, json=data)
-    print '消息发送状态:', resp.content
-
 
 def main():
     default_mode = "unstaged"
@@ -192,10 +168,11 @@ def main():
                         help='对比源分支(默认为:当前所在分支)')
     parser.add_argument('-i', '--ignore_patterns', type=str, default='',
                         help='忽略扫描文件正则(支持多个值,逗号分隔)')
-    parser.add_argument('-n', '--noti_seatalk', type=bool, default=False,
-                        help='是否通知到seatalk')
+    parser.add_argument('-p', '--print_progress', type=str, default='',
+                        help='是否打印文件检查进度')
 
     args = parser.parse_args()
+    os.environ["LINT_PRINT_PROGRESS"] = args.print_progress
 
     if not args.mode:
         args.mode = default_mode
@@ -223,10 +200,8 @@ def main():
         print '未有符合扫描的文件!'
         return
 
+    all_files.sort()
     r = Run(all_files, exit=False)
-
-    if args.noti_seatalk and r.linter.msg_status:
-        noti_seatalk()
 
     exit(r.linter.msg_status)
 

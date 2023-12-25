@@ -1,9 +1,14 @@
 [MASTER]
-jobs=4
+jobs=1
+load-plugins=pylint_file_checker
+
+[DESIGN]
+max-nested-blocks=4
+
 
 [MESSAGES CONTROL]
-enable=E
 disable=C,R,W, convention, refactor
+enable=E, W0101, W0102, W0611, W0612, R1702, R1704, R0401, I1000
 
 [FORMAT]
 max-line-length=120

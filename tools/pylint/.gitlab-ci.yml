@@ -1,0 +1,21 @@
+image: cyh328863397/centos7-food
+
+stages:
+  - lint
+
+
+lint:
+  stage: lint
+  before_script:
+    - 'export LINT_MODE="all"'
+    - '[[ "$CI_COMMIT_REF_NAME" =~ ^feature.*$ ]] && export LINT_MODE="branch"'
+  script:
+    - git fetch
+    - git checkout $CI_COMMIT_REF_NAME
+    - make pip
+    - make lint mode=$LINT_MODE source_branch=$CI_COMMIT_REF_NAME target_branch=origin/master print_progress=false
+  only:
+    - /^qa_refactor.*$/
+    - /^release.*$/
+    - /^master.*$/
+    - /^feature.*$/
