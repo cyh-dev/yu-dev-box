@@ -8,9 +8,9 @@ else
     exit 0
 fi
 
-# namespce
+# namespace
 if [[ "$@" == *"-n="* ]] || [[ "$@" == *"-n "* ]]; then
-    namespce=$(echo "$@" | sed -n 's/.*-n[= ]\([^ ]*\).*/\1/p')
+    namespace=$(echo "$@" | sed -n 's/.*-n[= ]\([^ ]*\).*/\1/p')
 else
     echo "Usage: [-n=qa|-n qa]"
     exit 0
@@ -33,7 +33,7 @@ if [[ "$@" == *"-o="* ]] || [[ "$@" == *"-o "* ]]; then
     fi
 fi
 
-cmd='kubectl --context '"$context"' -n '"$namespce"' get pods '"$wide_cmd"' | awk '\''NR==1 || /'"$pod_keyword"'/'\'''
+cmd='kubectl --context '"$context"' -n '"$namespace"' get pods '"$wide_cmd"' | awk '\''NR==1 || /'"$pod_keyword"'/'\'''
 # 将命令写到mac剪切板里
 echo $cmd | pbcopy
 eval "output=\$( $cmd )"
@@ -66,7 +66,7 @@ done
 
 pod_name=${array[$index]%% *}
 
-cmd="kubectl --context $context -n $namespce get pods $pod_name -o jsonpath='{range .spec.containers[*]}{.name}{\" \"}{.image}{\" \"}{range .ports[*]}{.containerPort}{\",\"}{end}{\"\n\"}'"
+cmd="kubectl --context $context -n $namespace get pods $pod_name -o jsonpath='{range .spec.containers[*]}{.name}{\" \"}{.image}{\" \"}{range .ports[*]}{.containerPort}{\",\"}{end}{\"\n\"}'"
 # 将命令写到mac剪切板里
 echo $cmd | pbcopy
 eval "container_output=\$( $cmd )"
