@@ -20,9 +20,9 @@ read -p "source file path:" source_path
 read -p "target file path:" target_path
 
 if [ $ops == "s" ]; then
-  cmd="kubectl --context $context cp -n $namespce -c $container_name $source_path $pod_name:$target_path"
+  cmd="kubectl --context $context cp -n $namespace -c $container_name $source_path $pod_name:$target_path"
 elif [ $ops == "r" ]; then
-  cmd="kubectl --context $context cp -n $namespce -c $container_name $pod_name:$source_path $target_path"
+  cmd="kubectl --context $context cp -n $namespace -c $container_name $pod_name:$source_path $target_path"
 fi
 
 # 将命令写到mac剪切板里
