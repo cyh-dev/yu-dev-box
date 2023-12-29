@@ -33,6 +33,12 @@ if [[ "$@" == *"-o="* ]] || [[ "$@" == *"-o "* ]]; then
     fi
 fi
 
+# -select_container=y
+select_container="n"
+if [[ "$@" == *"-select_container="* ]] || [[ "$@" == *"-select_container "* ]]; then
+    select_container=$(echo "$@" | sed -n 's/.*-select_container[= ]\([^ ]*\).*/\1/p')
+fi
+
 cmd='kubectl --context '"$context"' -n '"$namespace"' get pods '"$wide_cmd"' | awk '\''NR==1 || /'"$pod_keyword"'/'\'''
 # 将命令写到mac剪切板里
 echo $cmd | pbcopy
@@ -72,7 +78,9 @@ echo $cmd | pbcopy
 eval "container_output=\$( $cmd )"
 IFS=$'\n' read -rd '' -a array <<<"$container_output"
 container_index=1
-read -p "whether to select container(y or n):" is_select_container
+if [ "$select_container" == "y" ];then
+  read -p "whether to select container(y or n):" is_select_container
+fi
 if [ "$is_select_container" == "y" ];then
     format="%-3s %-40s %-80s %-20s\n"
     printf "$format" "Id" "Name" "Image" "Ports"

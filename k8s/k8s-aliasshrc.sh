@@ -1,21 +1,30 @@
 #!/bin/bash
 
-alias kubectl-get-pods-vn-test="$( cd "$( dirname "${BASH_SOURCE[0]:-${(%):-%N}}" )" >/dev/null 2>&1 && pwd )/kubectl-get-pod-info.sh -c=vn.test"
-alias kubectl-get-pods-vn-live="$( cd "$( dirname "${BASH_SOURCE[0]:-${(%):-%N}}" )" >/dev/null 2>&1 && pwd )/kubectl-get-pod-info.sh -c=vn.live"
+kubectl_get_pods_cmd="$( cd "$( dirname "${BASH_SOURCE[0]:-${(%):-%N}}" )" >/dev/null 2>&1 && pwd )/kubectl-get-pod-info.sh"
+alias kubectl-get-pods=$kubectl_get_pods_cmd
 
-alias kubectl-bash-vn-test="$( cd "$( dirname "${BASH_SOURCE[0]:-${(%):-%N}}" )" >/dev/null 2>&1 && pwd )/kubectl-exec.sh -c=vn.test -e=bash"
-alias kubectl-bash-vn-live="$( cd "$( dirname "${BASH_SOURCE[0]:-${(%):-%N}}" )" >/dev/null 2>&1 && pwd )/kubectl-exec.sh -c=vn.live -e=bash"
+kubectl_desc_cmd="$( cd "$( dirname "${BASH_SOURCE[0]:-${(%):-%N}}" )" >/dev/null 2>&1 && pwd )/kubectl-desc.sh"
+alias kubectl-desc=$kubectl_desc_cmd
 
-alias kubectl-sh-vn-test="$( cd "$( dirname "${BASH_SOURCE[0]:-${(%):-%N}}" )" >/dev/null 2>&1 && pwd )/kubectl-exec.sh -c=vn.test -e=sh"
-alias kubectl-sh-vn-live="$( cd "$( dirname "${BASH_SOURCE[0]:-${(%):-%N}}" )" >/dev/null 2>&1 && pwd )/kubectl-exec.sh -c=vn.live -e=sh"
+kubectl_bash_cmd="$( cd "$( dirname "${BASH_SOURCE[0]:-${(%):-%N}}" )" >/dev/null 2>&1 && pwd )/kubectl-bash.sh"
+alias kubectl-bash=$kubectl_bash_cmd
 
-alias kubectl-log-vn-test="$( cd "$( dirname "${BASH_SOURCE[0]:-${(%):-%N}}" )" >/dev/null 2>&1 && pwd )/kubectl-log.sh -c=vn.test"
-alias kubectl-log-vn-live="$( cd "$( dirname "${BASH_SOURCE[0]:-${(%):-%N}}" )" >/dev/null 2>&1 && pwd )/kubectl-log.sh -c=vn.live"
+kubectl_sh_cmd="$( cd "$( dirname "${BASH_SOURCE[0]:-${(%):-%N}}" )" >/dev/null 2>&1 && pwd )/kubectl-sh.sh"
+alias kubectl-sh=$kubectl_sh_cmd
 
-alias kubectl-cpr-vn-test="$( cd "$( dirname "${BASH_SOURCE[0]:-${(%):-%N}}" )" >/dev/null 2>&1 && pwd )/kubectl-cp.sh -c=vn.test -ops=r"
-alias kubectl-cps-vn-test="$( cd "$( dirname "${BASH_SOURCE[0]:-${(%):-%N}}" )" >/dev/null 2>&1 && pwd )/kubectl-cp.sh -c=vn.test -ops=s"
-alias kubectl-cpr-vn-live="$( cd "$( dirname "${BASH_SOURCE[0]:-${(%):-%N}}" )" >/dev/null 2>&1 && pwd )/kubectl-cp.sh -c=vn.live -ops=r"
-alias kubectl-cps-vn-live="$( cd "$( dirname "${BASH_SOURCE[0]:-${(%):-%N}}" )" >/dev/null 2>&1 && pwd )/kubectl-cp.sh -c=vn.live -ops=s"
+kubectl_exec_cmd="$( cd "$( dirname "${BASH_SOURCE[0]:-${(%):-%N}}" )" >/dev/null 2>&1 && pwd )/kubectl-exec.sh"
+alias kubectl-exec=$kubectl_exec_cmd
 
-alias kubectl-desc-vn-test="$( cd "$( dirname "${BASH_SOURCE[0]:-${(%):-%N}}" )" >/dev/null 2>&1 && pwd )/kubectl-desc.sh -c=vn.test"
-alias kubectl-desc-vn-live="$( cd "$( dirname "${BASH_SOURCE[0]:-${(%):-%N}}" )" >/dev/null 2>&1 && pwd )/kubectl-desc.sh -c=vn.live"
+kubectl_log_cmd="$( cd "$( dirname "${BASH_SOURCE[0]:-${(%):-%N}}" )" >/dev/null 2>&1 && pwd )/kubectl-log.sh"
+alias kubectl-log=$kubectl_log_cmd
+
+kubectl_cpr_cmd="$( cd "$( dirname "${BASH_SOURCE[0]:-${(%):-%N}}" )" >/dev/null 2>&1 && pwd )/kubectl-cpr.sh"
+alias kubectl-cpr=$kubectl_cpr_cmd
+kubectl_cps_cmd="$( cd "$( dirname "${BASH_SOURCE[0]:-${(%):-%N}}" )" >/dev/null 2>&1 && pwd )/kubectl-cps.sh"
+alias kubectl-cps=$kubectl_cps_cmd
+
+
+# k8s zsh compdef
+if type compdef &>/dev/null; then
+    source $( cd "$( dirname "${BASH_SOURCE[0]:-${(%):-%N}}" )" >/dev/null 2>&1 && pwd )/kubectl-compdef-zshrc.sh
+fi
