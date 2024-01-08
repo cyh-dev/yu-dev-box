@@ -1,0 +1,28 @@
+name: Docker Build and Push
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Login to DockerHub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Run Docker Build
+      run: |
+        docker build -t cyh328863397/yu-dev-centos7:latest -f docker/yu-dev-centos7.Dockerfile .
+
+    - name: Push to DockerHub
+      run: |
+        docker push cyh328863397/yu-dev-centos7:latest
