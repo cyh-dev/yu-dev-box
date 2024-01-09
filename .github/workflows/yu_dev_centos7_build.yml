@@ -46,29 +46,30 @@ jobs:
             ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ needs.get-tags.outputs.tags }}
             ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest
 
-#  push-ghcr:
-#    needs: get-tags
-#    runs-on: ubuntu-latest
-#    env:
-#      TZ: Asia/Shanghai
-#      REGISTRY: ghcr.io
-#    steps:
-#      - uses: actions/checkout@v3
-#      - name: Login
-#        uses: docker/login-action@v1
-#        with:
-#          registry: ${{ env.REGISTRY }}
-#          username: ${{ github.repository_owner }}
-#          password: ${{ secrets.GITHUB_TOKEN }}
-#      - name: Build && Push
-#        uses: docker/build-push-action@v2
-#        with:
-#          context: .
-#          file: ./Dockerfile
-#          push: true
-#          tags: |
-#            ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ needs.get-tags.outputs.tags }}
-#            ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:latest
+  push-ghcr:
+    needs: get-tags
+    runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Shanghai
+      REGISTRY: ghcr.io
+    steps:
+      - uses: actions/checkout@v3
+      - name: Login
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build && Push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: docker/yu-dev-centos7.Dockerfile
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ needs.get-tags.outputs.tags }}
+            ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:latest
+
 #  push-docker-pkg-github:
 #    needs: get-tags
 #    runs-on: ubuntu-latest
