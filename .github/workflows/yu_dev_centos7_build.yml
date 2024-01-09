@@ -49,6 +49,7 @@ jobs:
   push-ghcr:
     needs: get-tags
     runs-on: ubuntu-latest
+    permissions: write-all
     env:
       TZ: Asia/Shanghai
       REGISTRY: ghcr.io
