@@ -4,7 +4,7 @@ on:
   workflow_dispatch: #github页面手动触发
   push:
     tags:
-      - "yu-dev-centos7-*.*"
+      - "yu-dev-centos7-*"
 env:
   IMAGE_NAME: yu-dev-centos7 #这是您的镜像名
 
