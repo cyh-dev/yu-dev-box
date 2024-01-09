@@ -4,7 +4,7 @@ on:
   workflow_dispatch: #github页面手动触发
   push:
     tags:
-      - "v*.*"
+      - "yu-dev-centos7-*.*"
 env:
   IMAGE_NAME: yu-dev-centos7 #这是您的镜像名
 
@@ -19,9 +19,9 @@ jobs:
       - uses: actions/checkout@v3
       - id: output-id
         run: |
-          VERSION=edge
+          VERSION=$(date +%s)
           if [[ $GITHUB_REF == refs/tags/* ]]; then
-            VERSION=${GITHUB_REF#refs/tags/v}
+            VERSION=${GITHUB_REF#refs/tags/yu-dev-centos7-}
           fi
           echo "v=${VERSION}" >> $GITHUB_OUTPUT
   push-docker-hub:
