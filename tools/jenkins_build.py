@@ -3,6 +3,7 @@
 
 import argparse
 import os
+import re
 import time
 
 import requests
@@ -31,8 +32,11 @@ def filter_pipelines(key):
     print("Index\tPipeline")
     index = 0
     result_pipelines = []
+    key = key.replace(".", "\\.")
+    key = key.replace("*", ".*")
+    key = key.replace("?", ".")
     for pipeline in global_pipelines:
-        if key in pipeline:
+        if re.search(key, pipeline):
             index += 1
             print("{index}\t{pipeline}".format(index=index, pipeline=pipeline))
             result_pipelines.append(pipeline)
